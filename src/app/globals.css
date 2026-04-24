@@ -1,8 +1,8 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #000000;
+  --foreground: #000000;
 }
 
 @theme inline {
@@ -12,15 +12,52 @@
   --font-mono: var(--font-geist-mono);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}
-
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-geist-sans), sans-serif;
+  overflow: hidden;
+}
+
+/* Reduced-motion animations - much lighter */
+@media (prefers-reduced-motion: no-preference) {
+  .animate-float-soft {
+    animation: floatSoft 8s ease-in-out infinite;
+  }
+
+  .animate-glass-drift {
+    animation: glassDrift 10s ease-in-out infinite;
+  }
+}
+
+@keyframes floatSoft {
+  0%,
+  100% {
+    transform: translateY(0px);
+  }
+
+  50% {
+    transform: translateY(-3px);
+  }
+}
+
+@keyframes glassDrift {
+  0%,
+  100% {
+    transform: translateY(0px) scale(1);
+  }
+
+  50% {
+    transform: translateY(-2px) scale(1.005);
+  }
+}
+
+/* Smooth transitions */
+* {
+  transition-duration: 150ms;
+}
+
+/* Disable pointer events on non-interactive elements */
+.pointer-events-none {
+  pointer-events: none;
 }
